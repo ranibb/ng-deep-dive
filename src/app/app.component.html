@@ -1,15 +1,12 @@
 <div class="top-menu">
     <img class="logo" src="https://angular-academy.s3.amazonaws.com/main-logo/main-page-logo-small-hat.png">
-  </div>
+</div>
   
-  <div class="courses">
-    <app-course-card 
-      (courseSelected)="onCourseSelected($event)"
-      [course]="courses[0]">
-    </app-course-card>
+<div class="courses" #container>
   
-    <app-course-card 
+  <app-course-card #cardRef
     (courseSelected)="onCourseSelected($event)"
-    [course]="courses[1]">
+    [course]="courses[0]">
   </app-course-card>
-  </div>
+
+</div>
