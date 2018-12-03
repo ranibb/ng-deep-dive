@@ -3,7 +3,7 @@
   <div class="course-title">
     {{cardIndex || ''  + ' ' + course.description}}
   </div>
-  <img width="300" [alt]="course.description" *ngIf="isImageVisible(); else noImage" [src]="course.iconUrl">
+  <img #courseImage width="300" [alt]="course.description" *ngIf="isImageVisible(); else noImage" [src]="course.iconUrl">
 
   <ng-template #noImage>
     <p>No image is available.</p>
