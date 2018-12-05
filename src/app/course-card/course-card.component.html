@@ -1,6 +1,6 @@
-<div class="app-course-card" *ngIf="course">
+<div class="app-course-card" *ngIf="course" [ngClass]="cardClasses()" [ngStyle]="cardStyles()">
 
-  <div class="course-title"> {{course.description}}</div>
+  <div class="course-title"> {{cardIndex || ''}} {{course.description}}</div>
 
   <ng-content select="app-course-image"></ng-content>
 

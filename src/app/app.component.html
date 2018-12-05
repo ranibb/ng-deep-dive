@@ -4,13 +4,15 @@
 
 <div class="courses">
 
-  <app-course-card *ngFor="let course of courses" [course]="course" (courseSelected)="onCourseSelected($event)">
+  <app-course-card *ngFor="let course of courses; index as i" [course]="course" [cardIndex] ="i+1" (courseSelected)="onCourseSelected($event)">
 
     <div>
       <p>some content</p>
     </div>
 
     <app-course-image [src]="course.iconUrl"></app-course-image>
+    <!-- <app-course-image [src]="courses[1].iconUrl"></app-course-image>
+    <app-course-image [src]="courses[2].iconUrl"></app-course-image> -->
 
     <div class="course-description" #courseDesc>
       {{course.longDescription}}>
