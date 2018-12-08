@@ -1,9 +1,3 @@
 <div class="app-course-image">
-
-  <img *ngIf="src ; else noImage" width="300" [src]="src">
-
+  <img width="300" [src]="src">
 </div>
-
-<ng-template #noImage>
-  <p>No image is available.</p>
-</ng-template>
