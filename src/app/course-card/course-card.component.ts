@@ -1,4 +1,4 @@
-import { Component, Input, EventEmitter, Output, ContentChild, AfterViewInit, ElementRef, ContentChildren, QueryList, AfterContentInit } from '@angular/core';
+import { Component, Input, EventEmitter, Output, ContentChild, ElementRef, ContentChildren, QueryList, AfterContentInit } from '@angular/core';
 import { Course } from '../model/course';
 import { CourseImageComponent } from '../course-image/course-image.component';
 
@@ -7,7 +7,7 @@ import { CourseImageComponent } from '../course-image/course-image.component';
   templateUrl: './course-card.component.html',
   styleUrls: ['./course-card.component.css']
 })
-export class CourseCardComponent implements AfterViewInit, AfterContentInit {
+export class CourseCardComponent implements AfterContentInit {
 
   @Input()
   course: Course;
@@ -18,24 +18,43 @@ export class CourseCardComponent implements AfterViewInit, AfterContentInit {
   @Output('courseSelected')
   courseSelected = new EventEmitter<Course>();
 
-  @ContentChild(CourseImageComponent, {read: ElementRef})
-  image: ElementRef;
 
+  @ContentChild(CourseImageComponent)
+  courseImageComponent: CourseImageComponent;
+  @ContentChild(CourseImageComponent, {read: ElementRef})
+  courseImageElement: ElementRef;
+  @ContentChild('imgComRef')
+  imgComRef: CourseImageComponent;
+  @ContentChild('imgComRef', {read: ElementRef})
+  imgEleRef: ElementRef;
+
+  @ContentChildren(CourseImageComponent)
+  courseImageComponents: QueryList<CourseImageComponent>;
   @ContentChildren(CourseImageComponent, {read: ElementRef})
-  images: QueryList<ElementRef>;
+  courseImageElements: QueryList<ElementRef>;
+  @ContentChildren('imgComRef')
+  imgComRefs: QueryList<CourseImageComponent>;
+  @ContentChildren('imgComRef', {read: ElementRef})
+  imgEleRefs: QueryList<ElementRef>;
+
 
   @ContentChild('courseDesc')
   courseDesc;
 
   constructor() { }
 
-  ngAfterViewInit() {
-    console.log(this.image);
-    console.log(this.courseDesc);
-  }
-
   ngAfterContentInit() {
-    console.log(this.images);
+    // console.log(this.courseImageComponent);
+    // console.log(this.courseImageElement);
+    // console.log(this.imgComRef);
+    // console.log(this.imgEleRef);
+
+    // console.log(this.courseImageComponents);
+    // console.log(this.courseImageElements);
+    // console.log(this.imgComRefs);
+    // console.log(this.imgEleRefs);
+
+    // console.log(this.courseDesc);
   }
 
   onCourseViewed() {

@@ -2,17 +2,17 @@
   <img class="logo" src="https://angular-academy.s3.amazonaws.com/main-logo/main-page-logo-small-hat.png">
 </div>
 
-<div class="courses">
+<div class="courses" #container>
 
-  <app-course-card *ngFor="let course of courses; index as i" [course]="course" [cardIndex] ="i+1" (courseSelected)="onCourseSelected($event)">
+  <app-course-card *ngFor="let course of courses; index as i" [course]="course" [cardIndex] ="i+1" (courseSelected)="onCourseSelected($event)" #cardCompRef>
 
     <div>
       <p>some content</p>
     </div>
 
-    <app-course-image [src]="course.iconUrl"></app-course-image>
-    <!-- <app-course-image [src]="courses[1].iconUrl"></app-course-image>
-    <app-course-image [src]="courses[2].iconUrl"></app-course-image> -->
+    <app-course-image [src]="course.iconUrl" #imgComRef></app-course-image>
+    <!-- <app-course-image [src]="courses[1].iconUrl" #imgComRef></app-course-image>
+    <app-course-image [src]="courses[2].iconUrl" #imgComRef></app-course-image> -->
 
     <div class="course-description" #courseDesc>
       {{course.longDescription}}>
