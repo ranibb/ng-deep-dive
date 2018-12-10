@@ -2,6 +2,7 @@ import { Component, AfterViewInit, ViewChild, ViewChildren, QueryList, ElementRe
 import {COURSES} from '../db-data';
 import { Course } from './model/course';
 import { CourseCardComponent } from './course-card/course-card.component';
+import { HighlightedDirective } from './directives/highlighted.directive';
 
 @Component({
   selector: 'app-root',
@@ -14,19 +15,25 @@ export class AppComponent implements AfterViewInit {
 
   constructor() { }
 
+  // @ViewChild(HighlightedDirective)
+  // highlighted: HighlightedDirective;
+
+  @ViewChild(CourseCardComponent, {read: HighlightedDirective})
+  highlighted: HighlightedDirective;
+
   @ViewChild(CourseCardComponent)
-  CourseCardComponent: CourseCardComponent;
+  courseCardComponent: CourseCardComponent;
   @ViewChild(CourseCardComponent, {read: ElementRef})
-  CourseCardElement: ElementRef;
+  courseCardElement: ElementRef;
   @ViewChild('cardCompRef')
   cardComponentRef: CourseCardComponent;
   @ViewChild('cardCompRef', {read: ElementRef})
   cardElementRef: ElementRef;
 
   @ViewChildren(CourseCardComponent)
-  CourseCardComponents: QueryList<CourseCardComponent>;
+  courseCardComponents: QueryList<CourseCardComponent>;
   @ViewChildren(CourseCardComponent, {read: ElementRef})
-  CourseCardElements: QueryList<ElementRef>;
+  courseCardElements: QueryList<ElementRef>;
   @ViewChildren('cardCompRef')
   cardComponentRefs: QueryList<CourseCardComponent>;
   @ViewChildren('cardCompRef', {read: ElementRef})
@@ -47,10 +54,16 @@ export class AppComponent implements AfterViewInit {
     // console.log(this.cardElementRefs);
 
     // console.log(this.container);
+
+    console.log(this.highlighted);
   }
 
   onCourseSelected(course: Course) {
     console.log('App component - click event bubbled...', course);
+  }
+
+  onToggle(appHighlighted: boolean) {
+    // console.log(appHighlighted);
   }
 
 }

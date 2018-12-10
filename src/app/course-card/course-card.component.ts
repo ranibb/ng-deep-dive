@@ -73,7 +73,7 @@ export class CourseCardComponent implements AfterContentInit {
 
   cardStyles() {
     return {
-      // 'background-image': 'url(' + this.course.iconUrl + ')'
+      // 'background-image': 'url(' + this.course.iconUrls + ')'
     };
   }
 

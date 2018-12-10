@@ -1,8 +1,9 @@
 <div class="app-course-card" *ngIf="course" [ngClass]="cardClasses()" [ngStyle]="cardStyles()">
 
-  <div class="course-title"> {{cardIndex || ''}} {{course.description}}</div>
+  <div class="course-title">{{cardIndex || ''}} {{course.description}}</div>
 
-  <ng-content select="app-course-image" *ngIf="course.iconUrl ; else noImage"></ng-content>
+  <ng-content select="app-course-image" *ngIf="course.iconUrls && course.iconUrls.length; else noImage"></ng-content>
+  <!-- <ng-content select="app-course-image" *appNgxUnless="!course.iconUrls"></ng-content> -->
 
   <ng-template #noImage>
     <ng-container *ngTemplateOutlet="noImageTpl; context: {description: course.description}"></ng-container>

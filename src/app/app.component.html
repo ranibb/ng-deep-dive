@@ -9,17 +9,26 @@
     <img src="/assets/empty-image.png">
   </ng-template>
 
-  <app-course-card *ngFor="let course of courses; index as i" [course]="course" [cardIndex]="i+1" [noImageTpl]="blankImage" (courseSelected)="onCourseSelected($event)" #cardCompRef>
+
+  <app-course-card 
+    *ngFor="let course of courses; index as i"
+    [appHighlighted] = false
+    #highlighter="hl"
+    [course]="course" 
+    [cardIndex]="i+1" 
+    [noImageTpl]="blankImage" 
+    (courseSelected)="onCourseSelected($event)" 
+    (toggleHighlight)="onToggle($event)"
+    #cardCompRef>
 
     <div>
       <p>some content</p>
     </div>
 
-    <app-course-image [src]="course.iconUrl" #imgComRef></app-course-image>
-    <!-- <app-course-image [src]="courses[1].iconUrl" #imgComRef></app-course-image>
-    <app-course-image [src]="courses[2].iconUrl" #imgComRef></app-course-image> -->
+    <app-course-image *ngFor="let iconUrl of course.iconUrls; index as i" [iconUrl]="course.iconUrls[i]" #imgComRef></app-course-image>
 
-    <div class="course-description" #courseDesc>
+
+    <div class="course-description" #courseDesc (dblclick)="highlighter.toggle()">
       {{course.longDescription}}>
     </div>
 
