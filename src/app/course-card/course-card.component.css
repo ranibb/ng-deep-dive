@@ -1,3 +1,74 @@
+/* If targeting the component itself from within companion CSS file, use the ':host' keyword instead of the component selector string */
+/* app-course-card {
+  display: block;
+} */
+:host {
+  display: block;
+}
+
+:host.is-first:before {
+  border-top: 2px solid grey;
+  padding-top: 20px;
+  content: "";
+  background: #fff;
+  display: block;
+}
+
+:host.is-last:after {
+  border-bottom: 2px solid grey;
+  padding-top: 20px;
+  content: "";
+  background: #fff;
+  display: block;
+}
+
+:host.is-last .app-course-card {
+  margin-bottom: 0px;
+}
+
+:host.is-even {
+  background: lightgray;
+}
+
+:host.is-odd {
+  background: lightcyan;
+}
+
+/*
+** The :host-context allows to style a component depending on the presence of CSS styles outside
+** the component itself.
+*/
+:host-context(.salmon-theme) .app-course-card {
+  background: lightsalmon
+}
+
+.app-course-card {
+  margin-bottom: 40px;
+  text-align: center;
+  border-radius: 4px;
+  padding: 20px 0;
+  box-shadow: 0 1px 16px 0 rgba(0, 0, 0, .2), 0 2px 8px 0 rgba(0, 0, 0, .14), 0 4px 8px -1px rgba(0, 0, 0, .12);
+}
+
+.app-course-card .course-title {
+  font-size: 27px;
+  font-weight: bold;
+}
+
+/*
+* To bypass the angular view encapsulation mechanism, use the keyword '::ng-deep'. 
+* Thus, the selector after '::ng-deep' is no longer going to be made specific to a 
+* particular component. A typical use case for '::ng-deep' is when we want to style 
+* elements that we have received in our component via content projection.
+*/
+
+.app-course-card ::ng-deep .course-description {
+  max-width: 360px;
+  margin: 0 auto;
+  margin-top: 15px;
+  user-select: none;
+}
+
 .app-course-card.beginner {
   background: lightgreen;
 }
