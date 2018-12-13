@@ -1,8 +1,10 @@
-import { Component, AfterViewInit, ViewChild, ViewChildren, QueryList, ElementRef, ViewEncapsulation } from '@angular/core';
-import {COURSES} from '../db-data';
+import { Component, AfterViewInit, ViewChild, ViewChildren, QueryList, ElementRef, ViewEncapsulation, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+
 import { Course } from './model/course';
 import { CourseCardComponent } from './course-card/course-card.component';
 import { HighlightedDirective } from './directives/highlighted.directive';
+import { CoursesService } from './services/courses.service';
 
 @Component({
   selector: 'app-root',
@@ -12,11 +14,11 @@ import { HighlightedDirective } from './directives/highlighted.directive';
   // encapsulation: ViewEncapsulation.None // Without Encapsulation
   // encapsulation: ViewEncapsulation.ShadowDom // Works like Emulated; It will become default after its implementation in browser is completed.
 })
-export class AppComponent implements AfterViewInit {
+export class AppComponent implements AfterViewInit, OnInit {
 
-  courses = COURSES;
+  courses$: Observable<Course[]>;
 
-  constructor() { }
+  constructor(private coursesService: CoursesService) { }
 
   // @ViewChild(HighlightedDirective)
   // highlighted: HighlightedDirective;
@@ -45,6 +47,17 @@ export class AppComponent implements AfterViewInit {
   @ViewChild('container')
   container: ElementRef;
 
+  ngOnInit() {
+    this.courses$ = this.coursesService.loadCourses();
+  }
+
+  save(course: Course) {
+    this.coursesService.saveCourse(course)
+      .subscribe(
+        () => console.log('Course Saved!')
+      );
+  }
+
   ngAfterViewInit() {
     // console.log(this.courseCardComponent);
     // console.log(this.courseCardElement);
@@ -58,7 +71,7 @@ export class AppComponent implements AfterViewInit {
 
     // console.log(this.container);
 
-    console.log(this.highlighted);
+    // console.log(this.highlighted);
   }
 
   onCourseSelected(course: Course) {

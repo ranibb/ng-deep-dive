@@ -21,6 +21,8 @@ export class CourseCardComponent implements AfterContentInit {
   @Output('courseSelected')
   courseSelected = new EventEmitter<Course>();
 
+  @Output('courseChanged')
+  courseChanged = new EventEmitter<Course>();
 
   @ContentChild(CourseImageComponent)
   courseImageComponent: CourseImageComponent;
@@ -58,6 +60,10 @@ export class CourseCardComponent implements AfterContentInit {
     // console.log(this.imgEleRefs);
 
     // console.log(this.courseDesc);
+  }
+
+  onSaveClicked(description: string) {
+    this.courseChanged.emit({...this.course, description});
   }
 
   onCourseViewed() {

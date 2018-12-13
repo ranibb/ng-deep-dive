@@ -2,6 +2,10 @@
 
   <div class="course-title">{{cardIndex || ''}} {{course.description}}</div>
 
+  <div class="edit-title">
+    Edit Title: <input #courseTitle [value]="course.description">
+  </div>
+
   <ng-content select="app-course-image" *ngIf="course.iconUrls && course.iconUrls.length; else noImage"></ng-content>
   <!-- <ng-content select="app-course-image" *appNgxUnless="!course.iconUrls"></ng-content> -->
 
@@ -21,5 +25,7 @@
   </div>
 
   <button (click)="onCourseViewed()">view Course</button>
+
+  <button (click)="onSaveClicked(courseTitle.value)">Save Course</button>
 
 </div>

@@ -2,7 +2,7 @@
   <img class="logo" src="https://angular-academy.s3.amazonaws.com/main-logo/main-page-logo-small-hat.png">
 </div>
 
-<div class="courses salmon-theme" #container >
+<div class="courses salmon-theme" *ngIf="courses$ | async as courses" #container >
 
   <ng-template #blankImage let-courseName="description">
     <p class="warn">{{courseName}} has no image yet.</p>
@@ -19,6 +19,7 @@
     [noImageTpl]="blankImage" 
     (courseSelected)="onCourseSelected($event)" 
     (toggleHighlight)="onToggle($event)"
+    (courseChanged) ="save($event)"
     #cardCompRef>
 
     <div>

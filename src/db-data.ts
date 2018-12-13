@@ -120,5 +120,6 @@ export const COURSES: any = [
 
 
 export function findCourseById(courseId: number) {
-  return COURSES.find(course => course.id === courseId);
+  // tslint:disable-next-line:triple-equals
+  return COURSES.find(course => course.id == courseId);
 }
