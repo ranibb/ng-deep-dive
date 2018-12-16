@@ -4,12 +4,19 @@ import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 
 import { Course } from '../model/course';
 
+let counter = 0;
+
 @Injectable({
   providedIn: 'root'
 })
 export class CoursesService {
 
-  constructor(private http: HttpClient) { }
+  id: number;
+
+  constructor(private http: HttpClient) {
+    counter++;
+    this.id = counter;
+  }
 
   loadCourses(): Observable<Course[]> {
     const params = new HttpParams()

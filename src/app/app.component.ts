@@ -1,10 +1,11 @@
-import { Component, AfterViewInit, ViewChild, ViewChildren, QueryList, ElementRef, ViewEncapsulation, OnInit } from '@angular/core';
+import { Component, AfterViewInit, ViewChild, ViewChildren, QueryList, ElementRef, ViewEncapsulation, OnInit, Inject } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { Course } from './model/course';
 import { CourseCardComponent } from './course-card/course-card.component';
 import { HighlightedDirective } from './directives/highlighted.directive';
 import { CoursesService } from './services/courses.service';
+import { CONFIG_TOKEN, AppConfig } from './config';
 
 @Component({
   selector: 'app-root',
@@ -18,7 +19,12 @@ export class AppComponent implements AfterViewInit, OnInit {
 
   courses$: Observable<Course[]>;
 
-  constructor(private coursesService: CoursesService) { }
+  constructor(
+    private coursesService: CoursesService,
+    @Inject(CONFIG_TOKEN) private config: AppConfig
+  ) {
+    console.log(config);
+  }
 
   // @ViewChild(HighlightedDirective)
   // highlighted: HighlightedDirective;
