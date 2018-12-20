@@ -1,11 +1,10 @@
 import { Component, AfterViewInit, ViewChild, ViewChildren, QueryList, ElementRef, ViewEncapsulation, OnInit, Inject } from '@angular/core';
 import { Observable } from 'rxjs';
-
 import { Course } from './model/course';
-import { CourseCardComponent } from './course-card/course-card.component';
-import { HighlightedDirective } from './directives/highlighted.directive';
-import { CoursesService } from './services/courses.service';
+import { CoursesService } from './courses/courses.service';
 import { CONFIG_TOKEN, AppConfig } from './config';
+import { CourseCardComponent } from './courses/course-card/course-card.component';
+import { HighlightedDirective } from './courses/directives/highlighted.directive';
 
 @Component({
   selector: 'app-root',
