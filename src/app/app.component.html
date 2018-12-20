@@ -11,7 +11,7 @@
 
 
   <app-course-card 
-    *ngFor="let course of courses; index as i"
+    *ngFor="let course of (courses | filterByCategory: 'BEGINNER'); index as i"
     [appHighlighted] = false
     #highlighter="hl"
     [course]="course" 
