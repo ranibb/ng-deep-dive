@@ -18,6 +18,8 @@ export class AppComponent implements AfterViewInit, OnInit {
 
   courses$: Observable<Course[]>;
 
+  coursesTotal: any;
+
   constructor(
     private coursesService: CoursesService,
     @Inject(CONFIG_TOKEN) private config: AppConfig
@@ -54,6 +56,12 @@ export class AppComponent implements AfterViewInit, OnInit {
 
   ngOnInit() {
     this.courses$ = this.coursesService.loadCourses();
+    this.coursesService.loadCourses().subscribe(
+      val => {
+        this.coursesTotal = val.length;
+        console.log(this.coursesTotal);
+      }
+    );
   }
 
   save(course: Course) {
@@ -85,6 +93,9 @@ export class AppComponent implements AfterViewInit, OnInit {
 
   onToggle(appHighlighted: boolean) {
     // console.log(appHighlighted);
+  }
+
+  onEditCourse() {
   }
 
 }
