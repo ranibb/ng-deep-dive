@@ -1,10 +1,12 @@
-import { Component, AfterViewInit, ViewChild, ViewChildren, QueryList, ElementRef, ViewEncapsulation, OnInit, Inject } from '@angular/core';
+import { Component, AfterViewInit, ViewChild, ViewChildren, QueryList, ElementRef, ViewEncapsulation, OnInit, Inject, Injector } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Course } from './model/course';
 import { CoursesService } from './courses/courses.service';
 import { CONFIG_TOKEN, AppConfig } from './config';
 import { CourseCardComponent } from './courses/course-card/course-card.component';
 import { HighlightedDirective } from './courses/directives/highlighted.directive';
+import {createCustomElement} from '@angular/elements';
+import { CourseTitleComponent } from './course-title/course-title.component';
 
 @Component({
   selector: 'app-root',
@@ -22,7 +24,8 @@ export class AppComponent implements AfterViewInit, OnInit {
 
   constructor(
     private coursesService: CoursesService,
-    @Inject(CONFIG_TOKEN) private config: AppConfig
+    @Inject(CONFIG_TOKEN) private config: AppConfig,
+    private injector: Injector
   ) {
     console.log(config);
   }
@@ -56,12 +59,25 @@ export class AppComponent implements AfterViewInit, OnInit {
 
   ngOnInit() {
     this.courses$ = this.coursesService.loadCourses();
+
     this.coursesService.loadCourses().subscribe(
       val => {
         this.coursesTotal = val.length;
         console.log(this.coursesTotal);
       }
     );
+
+    /**
+     * Turning a component into an element (creating a browser custom
+     * element that is linked to the component)
+     */
+    const htmlElement = createCustomElement(CourseTitleComponent, {injector: this.injector});
+
+    /**
+     * Register the custom element in the browser using the customElements
+     * API which a standard browser functionality.
+     */
+    customElements.define('course-title', htmlElement);
   }
 
   save(course: Course) {
